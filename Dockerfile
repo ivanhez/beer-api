@@ -1,19 +1,15 @@
-FROM ubuntu:latest
-ENV DEBIAN_FRONTEND=noninteractive
+FROM mysql:latest
 
-RUN apt-get update && \
-    apt-get install -y mysql-server
-
-ENV MYSQL_DATABASE=beer_db
-ENV MYSQL_USER=root
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=true
+ENV MYSQL_USER=beer
 ENV MYSQL_PASSWORD=password
-ENV MYSQL_ROOT_PASSWORD=password
+ENV MYSQL_DATABASE=beer_db
 
 COPY schema.sql /docker-entrypoint-initdb.d/schema.sql
 
-EXPOSE 3306
+# EXPOSE 3306
 
-CMD ["mysqld"]  
+# CMD ["mysqld"]  
 
 # docker build -t mysql-beer-image .
 # docker run --name mysql-beer-container -d -p 3306:3306 mysql-beer-image
