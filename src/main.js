@@ -11,6 +11,14 @@ import {
 const app = express();
 const port = 5000;
 
+const validatePost = (req, res, next) => {
+  const { beer_name, beer_type, flavors, abv, ibu, brewery } = req.query;
+  if (!beer_name) {
+    return res.status(400).json({ message: "Beer name is required" });
+  }
+  next();
+};
+
 app.get("/posts", async (req, res) => {
   try {
     const allRows = await getAllPosts();
@@ -33,9 +41,9 @@ app.get("/posts/:postId", async (req, res) => {
   }
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/posts", validatePost, async (req, res) => {
   try {
-    const newPost = req.body;
+    const newPost = req.query;
     const createdPost = await createPost(newPost);
     res.status(201).json({ data: createdPost });
   } catch (error) {
@@ -46,7 +54,7 @@ app.post("/posts", async (req, res) => {
 app.put("/posts/:postId", async (req, res) => {
   try {
     const postId = req.params.postId;
-    const postUpdates = req.body;
+    const postUpdates = req.query;
     const updatedPost = await updatePostById(postId, postUpdates);
     if (!updatedPost) {
       return res.status(404).json({ message: "Post not found" });
@@ -70,6 +78,10 @@ app.delete("/posts/:postId", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+app.use((req, res) => {
+  res.status(501).json({ message: "Endpoint not implemented" });
 });
 
 app.listen(port, () => {
