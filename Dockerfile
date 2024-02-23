@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y mysql-server
 
-ENV MYSQL_DATABASE=beerdb
+ENV MYSQL_DATABASE=beer_db
 ENV MYSQL_USER=root
 ENV MYSQL_PASSWORD=password
 ENV MYSQL_ROOT_PASSWORD=password

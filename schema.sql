@@ -1,6 +1,10 @@
-CREATE TABLE IF NOT EXISTS blog_posts (
+CREATE TABLE IF NOT EXISTS tbl_beer (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    beer_name VARCHAR(45) NOT NULL,
+    beer_type VARCHAR(45),
+    flavors VARCHAR(45),
+    alcohol_per VARCHAR(45),
+    price VARCHAR(45),
+    bar VARCHAR(45),
+    comments VARCHAR(45)
 );
