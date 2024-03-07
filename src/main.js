@@ -1,4 +1,6 @@
 import express from 'express'
+import cors from 'cors'
+
 import {
   createPost,
   getAllPosts,
@@ -9,6 +11,8 @@ import {
 
 const app = express()
 const port = 15177
+
+app.use(cors())
 
 const validatePost = (req, res, next) => {
   const {
