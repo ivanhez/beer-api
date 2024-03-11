@@ -10,6 +10,7 @@ import {
 } from './db.js'
 
 const app = express()
+const cors = cors()
 const port = 15177
 
 app.use(cors())
